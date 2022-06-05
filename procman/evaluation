@@ -18,21 +18,31 @@ cmd "07_rl" {
     exec = "roslaunch pokingbot_rl goal_rl_tf.launch";
     host = "localhost";
 }
+group "08_TARE" {
+    cmd "environment" {
+        exec = "./autonomous_exploration_development_environment/devel/setup.bash";
+        host = "localhost";
+    }
+    cmd "TARE" {
+        exec = "roslaunch vehicle_simulator husky_tare.launch";
+        host = "localhost";
+    }
+}
 cmd "05_map_tf" {
     exec = "roslaunch pokingbot_rl pub_map_tf.launch";
     host = "localhost";
 }
 
 group "06_visualize" {
-    cmd "rl_path" {
+    cmd "01_rl_path" {
         exec = "roslaunch pcl_tools visualization.launch path_name:=rl_path";
         host = "localhost";
     }
-    cmd "TARE_path" {
+    cmd "02_TARE_path" {
         exec = "roslaunch pcl_tools visualization.launch path_name:=TARE_path";
         host = "localhost";
     }
-    cmd "map" {
+    cmd "03_map" {
         exec = "roslaunch pcl_tools vis_map.launch path_name:=TARE_path";
         host = "localhost";
     }
@@ -44,5 +54,5 @@ cmd "rviz" {
 
 
 script "open_env" {
-    start cmd "01_core" wait "running";
+    start cmd "01_core";
 }
