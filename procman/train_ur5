@@ -1,0 +1,31 @@
+cmd "01_core" {
+    exec = "roscore";
+    host = "localhost";
+}
+cmd "02_gazebo" {
+    exec = "roslaunch real_to_sim_env gazebo_world.launch world:=combine_postbox2";
+    host = "localhost";
+}
+cmd "03_husky" {
+    exec = "roslaunch husky_ur5 spawn_robot.launch";
+    host = "localhost";
+}
+cmd "04_door_detection" {
+    exec = "roslaunch door_detector_sim door_detection.launch";
+    host = "localhost";
+}
+cmd "rviz" {
+    exec = "rviz -d rviz/train_ur5.rviz";
+    host = "localhost";
+}
+
+
+script "open_env" {
+    start cmd "01_core" wait "running";
+    wait ms 2000;
+    start cmd "02_gazebo" wait "running";
+    wait ms 10000;
+    start cmd "03_husky" wait "running";
+    wait ms 10000;
+    start cmd "04_door_detection" wait "running";
+}

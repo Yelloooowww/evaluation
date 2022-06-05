@@ -1,0 +1,48 @@
+cmd "01_core" {
+    exec = "roscore";
+    host = "localhost";
+}
+cmd "02_gazebo" {
+    exec = "roslaunch real_to_sim_env gazebo_world.launch world:=combine_postbox2";
+    host = "localhost";
+}
+cmd "03_husky" {
+    exec = "roslaunch husky_ur5 spawn_robot.launch ur5:=false stick:=true lidar:=true";
+    host = "localhost";
+}
+cmd "04_door_detection" {
+    exec = "roslaunch door_detector_sim door_detection.launch";
+    host = "localhost";
+}
+cmd "07_rl" {
+    exec = "roslaunch pokingbot_rl goal_rl_tf.launch";
+    host = "localhost";
+}
+cmd "05_map_tf" {
+    exec = "roslaunch pokingbot_rl pub_map_tf.launch";
+    host = "localhost";
+}
+
+group "06_visualize" {
+    cmd "rl_path" {
+        exec = "roslaunch pcl_tools visualization.launch path_name:=rl_path";
+        host = "localhost";
+    }
+    cmd "TARE_path" {
+        exec = "roslaunch pcl_tools visualization.launch path_name:=TARE_path";
+        host = "localhost";
+    }
+    cmd "map" {
+        exec = "roslaunch pcl_tools vis_map.launch path_name:=TARE_path";
+        host = "localhost";
+    }
+}
+cmd "rviz" {
+    exec = "rviz -d rviz/rviz.rviz";
+    host = "localhost";
+}
+
+
+script "open_env" {
+    start cmd "01_core" wait "running";
+}

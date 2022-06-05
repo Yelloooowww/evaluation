@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="veh" default="robot"/>
+
+  <group ns="$(arg veh)">
+    <node pkg="door_detector_sim" type="lidar_crop" name="lidar_crop" output="screen">
+      <param name="~x_max" value="0" />
+      <param name="~y_max" value="0.45" />
+      <param name="~z_max" value="0.6" />
+      <param name="~x_min" value="-0.8" />
+      <param name="~y_min" value="-0.45" />
+      <param name="~z_min" value="-4" />
+    </node>
+
+    <!-- run pointcloud_to_laserscan node -->
+    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+
+        <remap from="cloud_in" to="/robot/lidar_crop" />
+        <remap from="scan" to="/RL/scan" />
+        <rosparam>
+            target_frame: front_laser
+            min_height: -0.3
+            max_height: 0.5
+            transform_tolerance: 0.01
+            angle_min: -2.094395
+            angle_max: 2.094395
+            angle_increment: 0.017453
+            scan_time: 0.1
+            range_min: 0
+            range_max: 100.0
+            use_inf: False
+
+            # Concurrency level, affects number of pointclouds queued for processing and number of threads used
+            # 0 : Detect number of cores
+            # 1 : Single threaded
+            # 2->inf : Parallelism level
+            concurrency_level: 0
+        </rosparam>
+
+    </node>
+
+    <node pkg="door_detector_sim" type="door_and_ball_v2" name="door_and_ball_v2" output="screen" />
+  </group>
+</launch>

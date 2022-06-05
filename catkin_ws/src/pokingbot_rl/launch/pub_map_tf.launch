@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <arg name="veh" default="robot" />
+    <arg name="cmd" default="cmd_vel" />
+    <arg name="joy" default="joy_teleop/joy" />
+
+    <group ns="$(arg veh)">
+        <node pkg="pokingbot_rl" type="pub_gazebo_tf.py" name="pub_gazebo_tf" output="screen" />
+    </group>
+</launch>

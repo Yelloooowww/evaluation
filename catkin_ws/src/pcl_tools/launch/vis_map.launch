@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="veh" default="robot" />
+    <arg name="path_name" default="path" />
+
+    <group ns="$(arg veh)">
+      <node pkg="pcl_tools" type="icp" name="icp" output="screen" required="true">
+        <remap from="points" to="lidar_crop" />
+      </node>
+    </group>
+</launch>

@@ -1,0 +1,9 @@
+[submodule "autonomous_exploration_development_environment"]
+	path = autonomous_exploration_development_environment
+	url = git@github.com:Yelloooowww/autonomous_exploration_development_environment.git
+[submodule "catkin_ws/src/real_to_sim_env"]
+	path = catkin_ws/src/real_to_sim_env
+	url = git@github.com:ARG-NCTU/real_to_sim_env.git
+[submodule "catkin_ws/src/husky_ur5"]
+	path = catkin_ws/src/husky_ur5
+	url = git@github.com:kuolunwang/husky_ur5.git
