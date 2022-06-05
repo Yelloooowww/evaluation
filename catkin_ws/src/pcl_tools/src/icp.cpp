@@ -141,10 +141,10 @@ void MapFilter::pc_cb(const sensor_msgs::PointCloud2 msg)
     //     cout << "has converged:" << icp.hasConverged() << " score: " << icp.getFitnessScore() << endl;
     // }
     //
-    voxel.setInputCloud(pc);
+    // voxel.setInputCloud(pc);
     // voxel.filter(*pc);
-    passZ.setInputCloud(pc);
-    passZ.filter(*pc);
+    // passZ.setInputCloud(pc);
+    // passZ.filter(*pc);
     if(flag) *map += *pc;
     pcl::io::savePLYFileBinary("/home/argsubt/pokingbot-rl/forest_env.ply", *map);
 

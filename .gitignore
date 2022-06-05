@@ -32,3 +32,4 @@ catkin_ws/src/cmu_simulation_env/mesh/tunnel/*
 catkin_ws/src/cmu_simulation_env/mesh/garage/*
 
 *.ply
+*.bag
