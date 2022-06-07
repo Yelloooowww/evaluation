@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="veh" default="robot" />
+    <arg name="path_name" default="path" />
+
+    <group ns="$(arg veh)">
+      <node pkg="pcl_tools" type="auto_evaluation.py" name="auto_evaluation" output="screen" required="true">
+        <remap from="path" to="$(arg path_name)" />
+      </node>
+
+    </group>
+</launch>
